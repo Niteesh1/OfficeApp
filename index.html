@@ -1,0 +1,141 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Office Chores Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">OC</div>
+        <div>
+          <div class="brand-title">Office Chores</div>
+          <div class="brand-sub">Shared calendar for office upkeep</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn ghost" id="todayBtn">Today</button>
+        <div class="month-nav">
+          <button class="icon-btn" id="prevMonth" aria-label="Previous month">&lt;</button>
+          <div class="month-label" id="monthLabel">Month</div>
+          <button class="icon-btn" id="nextMonth" aria-label="Next month">&gt;</button>
+        </div>
+        <button class="btn primary" id="addChoreBtn">Add chore</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <aside class="panel members">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Team Members</div>
+            <div class="panel-sub">Assign chores to owners</div>
+          </div>
+        </div>
+        <div class="member-list" id="memberList"></div>
+        <div class="member-add">
+          <input type="text" id="memberName" placeholder="Add member" />
+          <button class="btn with-icon" id="addMemberBtn" type="button" aria-label="Add member">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Add
+          </button>
+        </div>
+      </aside>
+
+      <main class="calendar">
+        <div class="weekday-row">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </main>
+
+      <aside class="panel day-panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title" id="selectedDateLabel">Selected Day</div>
+            <div class="panel-sub">Click a date to see chores</div>
+          </div>
+        </div>
+        <div class="day-chores" id="dayChores"></div>
+      </aside>
+    </div>
+  </div>
+
+  <dialog class="modal" id="choreModal">
+    <form method="dialog" class="modal-card" id="choreForm">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">New Chore</div>
+          <div class="modal-sub">Add a one-time or recurring chore</div>
+        </div>
+        <button class="icon-btn" value="cancel" type="submit" aria-label="Close">x</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>Chore name</span>
+          <input type="text" id="choreTitle" required placeholder="e.g., Restock supplies" />
+        </label>
+        <label>
+          <span>Assignee</span>
+          <select id="choreAssignee"></select>
+        </label>
+        <label>
+          <span>Date</span>
+          <input type="date" id="choreDate" required />
+        </label>
+        <label>
+          <span>Start time</span>
+          <input type="time" id="choreTime" required />
+        </label>
+        <label>
+          <span>Duration (mins)</span>
+          <input type="number" id="choreDuration" min="15" step="15" value="30" />
+        </label>
+        <label>
+          <span>Recurrence</span>
+          <select id="choreRecurrence">
+            <option value="none">Does not repeat</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="weekdays">Weekdays (Mon-Fri)</option>
+          </select>
+        </label>
+        <label class="inline" id="recurrenceIntervalWrap">
+          <span>Every</span>
+          <div class="inline-field">
+            <input type="number" id="recurrenceInterval" min="1" value="1" />
+            <span id="recurrenceUnit">day(s)</span>
+          </div>
+        </label>
+        <label>
+          <span>Repeat until (optional)</span>
+          <input type="date" id="recurrenceEnd" />
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn ghost" value="cancel" type="submit">Cancel</button>
+        <button class="btn primary" id="saveChoreBtn" value="default" type="submit">Save chore</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
