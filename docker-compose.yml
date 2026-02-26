@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      PORT: "3001"
+      DATABASE_PATH: "/data/data.db"
+      CORS_ORIGIN: "http://localhost:3000"
+      DEV_BYPASS_AUTH: "true"
+    ports:
+      - "3001:3001"
+    volumes:
+      - backend_data:/data
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: "http://localhost:3001"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  backend_data:
