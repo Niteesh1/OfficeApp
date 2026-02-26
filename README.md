@@ -94,3 +94,18 @@ fly deploy
 - `main`: Original local setup (run frontend + backend separately with npm).
 - `docker-tesing`: Docker Compose setup with separate frontend and backend containers.
 - `docker-live`: Single Docker image that serves both API and frontend on one port.
+
+## Session Notes
+
+- Docker Compose (branch `docker-tesing`):
+  - Frontend: `http://localhost:3000`
+  - Backend: `http://localhost:3001/api/health`
+  - Run: `docker compose up --build`
+- Single image (branch `docker-live`):
+  - Build: `docker build -t officeapp:single .`
+  - Run: `docker run --rm -p 4000:4000 -e DEV_BYPASS_AUTH=true officeapp:single`
+  - URL: `http://localhost:4000`
+- Render/Netlify deploy:
+  - Backend URL example: `https://officeapp-....onrender.com`
+  - Frontend env var: `VITE_API_URL=<backend-url>`
+  - Backend env var: `CORS_ORIGIN=<netlify-url>`
