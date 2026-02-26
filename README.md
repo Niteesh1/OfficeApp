@@ -88,3 +88,9 @@ fly deploy
 ## Notes
 - The backend currently returns all chores; the React app handles recurrence display.
 - If you want multi-user sharing beyond Google auth, we can add team orgs and roles.
+
+## Branch Guide
+
+- `main`: Original local setup (run frontend + backend separately with npm).
+- `docker-tesing`: Docker Compose setup with separate frontend and backend containers.
+- `docker-live`: Single Docker image that serves both API and frontend on one port.
