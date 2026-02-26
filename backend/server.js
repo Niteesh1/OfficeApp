@@ -1,7 +1,9 @@
-﻿import "dotenv/config";
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { OAuth2Client } from "google-auth-library";
+import path from "path";
+import { fileURLToPath } from "url";
 import { initDb } from "./db.js";
 
 const PORT = process.env.PORT || 8081;
@@ -13,6 +15,8 @@ const DEV_BYPASS_AUTH = process.env.DEV_BYPASS_AUTH === "true";
 const db = initDb(DB_PATH);
 const app = express();
 const googleClient = GOOGLE_CLIENT_ID ? new OAuth2Client(GOOGLE_CLIENT_ID) : null;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
 app.use(express.json());
@@ -198,6 +202,15 @@ function formatChore(row) {
     },
   };
 }
+
+const publicDir = path.join(__dirname, "public");
+app.use(express.static(publicDir));
+app.get("*", (req, res) => {
+  if (req.path.startsWith("/api/")) {
+    return res.status(404).json({ error: "Not found" });
+  }
+  return res.sendFile(path.join(publicDir, "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`API listening on ${PORT}`);

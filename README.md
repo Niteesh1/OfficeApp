@@ -23,7 +23,7 @@ npm install
 npm run dev
 ```
 
-The API runs on `http://localhost:8080`.
+The API runs on `http://localhost:8081`.
 
 ### Auth
 - Dev mode uses `DEV_BYPASS_AUTH=true` in `backend/.env`.
@@ -47,6 +47,19 @@ npm run dev
 ```
 
 The app runs on `http://localhost:5173` and talks to the backend using `VITE_API_URL`.
+
+## Single-Image Docker
+
+This branch includes a single Docker image that serves both the API and the built frontend.
+
+Build and run:
+
+```
+docker build -t officeapp:single .
+docker run --rm -p 4000:4000 -e DEV_BYPASS_AUTH=true officeapp:single
+```
+
+Open `http://localhost:4000`.
 
 ## Deploy
 

@@ -1,6 +1,6 @@
 ﻿import React, { useMemo, useRef, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 function toISODate(date) {
   const year = date.getFullYear();
