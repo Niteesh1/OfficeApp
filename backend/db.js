@@ -1,4 +1,4 @@
-﻿import Database from "better-sqlite3";
+import Database from "better-sqlite3";
 
 export function initDb(dbPath) {
   const db = new Database(dbPath);

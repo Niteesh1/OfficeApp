@@ -162,6 +162,7 @@ export default function App() {
     recurrenceInterval: 1,
     recurrenceEnd: "",
   });
+  const defaultFormStateRef = useRef(formState);
 
   React.useEffect(() => {
     loadAll();
@@ -228,6 +229,7 @@ export default function App() {
   }
 
   function closeModal() {
+    setFormState(defaultFormStateRef.current);
     modalRef.current?.close();
   }
 
@@ -444,7 +446,14 @@ export default function App() {
               <div className="modal-title">New Chore</div>
               <div className="modal-sub">Add a one-time or recurring chore</div>
             </div>
-            <button className="icon-btn" value="cancel" type="submit" aria-label="Close">x</button>
+            <button
+              className="icon-btn"
+              type="button"
+              aria-label="Close"
+              onClick={closeModal}
+            >
+              x
+            </button>
           </div>
 
           <div className="form-grid">
@@ -536,7 +545,9 @@ export default function App() {
           </div>
 
           <div className="modal-actions">
-            <button className="btn ghost" value="cancel" type="submit" onClick={closeModal}>Cancel</button>
+            <button className="btn ghost" type="button" onClick={closeModal}>
+              Cancel
+            </button>
             <button className="btn primary" type="submit">Save chore</button>
           </div>
         </form>
