@@ -76,4 +76,4 @@ fly deploy
 - The backend currently returns all chores; the React app handles recurrence display.
 - If you want multi-user sharing beyond Google auth, we can add team orgs and roles.
 
-- Just added the gihub webhook
+- Just added the gihub webhooks
